@@ -57,7 +57,28 @@ jobs:
     # snip..
 {{< /highlight >}}
 
-Here there are two jobs - debug-build and release-build. release-build depends on debug-build completing successfully. 
+In this example there are two jobs - `debug-build` and `release-build`. `release-build` depends on `debug-build` completing successfully. 
 They both upload artifacts to which will be available for download from GitHub after the action completes. 
+
+When the code is pushed to GitHub the `debug-build` starts. 
+
+[![](media/Debug_Build.png)](media/Debug_Build.png)
+
+Once that completes successfully, the `release-build` starts.
+
+[![](media/Release_Build.png)](media/Release_Build.png)
+
+What that finishes the two artifacts will be available to download. 
+
+[![](media/Build_Finished.png)](media/Build_Finished.png)
+
+### You can run anything in a job
+You are not limited to building software in jobs, you can run things too. 
+
+After the build step in each job I have a run command that runs the compiled code, there is no good reason to do this here, but I've included it to show the flexibility of what you can do.
+
+{{< highlight yaml "linenos=true" >}}
+  - name: Run it for fun
+    run: dotnet ./bin/debug/net5.0/GitHubActionsHelloWorldConsole.dll 
 
 
