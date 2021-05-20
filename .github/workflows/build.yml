@@ -34,7 +34,7 @@ jobs:
 
 
   release-build:
-    #needs: debug-build
+    needs: debug-build
     name: Build a release versions of the app
     runs-on: ubuntu-latest
 

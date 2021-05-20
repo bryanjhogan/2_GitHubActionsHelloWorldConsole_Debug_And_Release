@@ -9,8 +9,8 @@ _Full source code available [here](media/xxxx.zip)_.
 
 In the previous post I gave a quick introduction to GitHub Actions showing how to build a small Hello World application and make the artifact available for download. 
 
-In this post I'll show how to build debug and release versions of the same application, with the release only being built if the debug one builds. 
-This in itself is not a whole lot of use, but in the next post I'm going to show how to add manual approvals before performing certain jobs, like deploying built code to AWS. 
+In this post I'll show how to build debug and release versions of the same application, with the release only being built if the debug one builds successfully. 
+This in itself is not a whole lot of use, but in the next post I'm going to show how to add manual approvals before performing certain jobs, like deploying built code to AWS. In that scenario, a build will occur, a user needs to inspect the output and the approve deploying the artifact, now that is useful.
 
 But for now, I'm keeping it simple without the complications of external services, secrets, environment variables, etc. 
 
@@ -33,7 +33,31 @@ class Program
 {{< /highlight >}}
 
 ### Two Jobs in the GitHub Action Workflow
-In the previous post there was only one job, but you can have as many as you want, and these jobs can have dependencies on each other, i.e. if job 1 fails, don't run job 2. 
+In the previous post there was only one job, but you can have as many as you want, and these jobs can run independently (and in parallel) or have dependencies on each other, e.g. job 2 runs only if job 1 succeeds. 
 
+In this example I want to run the release build only if the debug build succeeds. 
+
+The overall structure of the workflow looks like this - 
+
+{{< highlight yaml "linenos=true" >}}
+name: A workflow to build an application in debug and release
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  debug-build:
+    name: Build a debug versions of the app
+    # snip..
+
+  release-build:
+    needs: debug-build
+    name: Build a release versions of the app
+    # snip..
+{{< /highlight >}}
+
+Here there are two jobs - debug-build and release-build. release-build depends on debug-build completing successfully. 
+They both upload artifacts to which will be available for download from GitHub after the action completes. 
 
 
