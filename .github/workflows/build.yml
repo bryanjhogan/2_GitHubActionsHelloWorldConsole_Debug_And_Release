@@ -33,9 +33,9 @@ jobs:
 
 
   release-build:
-      needs: debug-build
-      name: Build a release versions of the app
-      runs-on: ubuntu-latest
+    needs: debug-build
+    name: Build a release versions of the app
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout source code
