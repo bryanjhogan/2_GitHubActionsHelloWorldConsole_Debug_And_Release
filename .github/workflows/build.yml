@@ -6,7 +6,7 @@ on:
 
 jobs:
   debug-build:
-    name: Build the app
+    name: Build a debug versions of the app
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +24,7 @@ jobs:
     - name: Build
       run: dotnet build -c debug --no-restore
     - name: Run it for fun
-      run: dotnet ./bin/xxx/net5.0/GitHubActionsHelloWorldConsole.dll 
+      run: dotnet ./bin/debug/net5.0/GitHubActionsHelloWorldConsole.dll 
     - name: Upload the debug build artifact
       uses: actions/upload-artifact@v2.2.2
       with:
