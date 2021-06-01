@@ -23,10 +23,10 @@ jobs:
     
     - name: Build
       run: dotnet build -c debug --no-restore
+      
     - name: Run it for fun
       run: dotnet ./bin/debug/net5.0/GitHubActionsHelloWorldConsole.dll 
-    - name: Ping
-      run: ping -c 2 localhost
+
     - name: Upload the debug build artifact
       uses: actions/upload-artifact@v2.2.2
       with:

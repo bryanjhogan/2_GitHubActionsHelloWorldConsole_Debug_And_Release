@@ -5,7 +5,7 @@ date: "2021-04-30"
 tags: [dotnet, GitHub Actions]
 ---
 
-_Full source code available [here](media/xxxx.zip)_.
+_Full source code available [here](media/GitHubActionsHelloWorld_Debug_And_Release.zip)_.
 
 In the previous post I gave a quick introduction to GitHub Actions showing how to build a small Hello World application and make the artifact available for download. 
 
@@ -77,8 +77,13 @@ You are not limited to building software in jobs, you can run things too.
 
 After the build step in each job I have a run command that runs the compiled code, there is no good reason to do this here, but I've included it to show the flexibility of what you can do.
 
-{{< highlight yaml "linenos=true" >}}
+{{< highlight yaml "linenos=false" >}}
   - name: Run it for fun
     run: dotnet ./bin/debug/net5.0/GitHubActionsHelloWorldConsole.dll 
+{{< /highlight >}}
 
+You can also use command that are available on the host Ubuntu operating system where the build is happening. 
 
+In the next post I'll show how to add a manual approval before performing a step.
+
+_Full source code available [here](media/GitHubActionsHelloWorld_Debug_And_Release.zip)_.
